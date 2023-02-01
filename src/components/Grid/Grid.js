@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { checkGuess } from '../../game-helpers';
 
 function Grid({ guessList, answer, setResult, setShowBanner }) {
@@ -16,8 +16,14 @@ function Grid({ guessList, answer, setResult, setShowBanner }) {
 
   const guessArr = [...guessList].splice(0, 6);
 
+  console.log(guessList);
   useEffect(() => {
-    guessArr.forEach(({ guess }) => {
+    if (guessList.length > 6) {
+      setResult(false);
+      setShowBanner(true);
+    }
+
+    guessList.forEach(({ guess }) => {
       if (guess === answer) {
         setResult(true);
         setShowBanner(true);
